@@ -3,4 +3,5 @@ export interface ITask {
   created: string
   title: string
   description: string
+  status: string
 }

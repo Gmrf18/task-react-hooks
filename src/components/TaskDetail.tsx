@@ -6,11 +6,20 @@ export const TaskDetail: React.FC<Props> = ({
   setModalSidebar,
   showModalSidebar,
 }) => {
-  const { currentTask } = useContext(CurrentTaskProvider);
+  const { currentTask, setCurrentTask } = useContext(CurrentTaskProvider);
 
   const closeSidebar = () => {
+    setCurrentTask(null);
     setModalSidebar({
       ...showModalSidebar,
+      sidebar: false,
+    });
+  };
+
+  const editTask = () => {
+    setModalSidebar({
+      ...showModalSidebar,
+      modal: true,
       sidebar: false,
     });
   };
@@ -28,7 +37,7 @@ export const TaskDetail: React.FC<Props> = ({
       <p>{currentTask?.description}</p>
       <br />
       <p>Updated Today at 6:30pm by Gerardo Reyes</p>
-      <button>Edit</button>
+      <button onClick={editTask}>Edit</button>
       <button>Delete</button>
     </div>
   );

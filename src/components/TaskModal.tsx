@@ -1,36 +1,57 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { Props } from "../interfaces/modalSidebar.interface";
 import { nanoid } from "nanoid";
 import { format } from "date-fns";
+import { ITask } from "../interfaces/task.interface";
+import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
 
 interface taskModal extends Props {
-  task: any;
+  tasks: ITask[];
   setTask: any;
-  taskExist?: any;
 }
 
 export const TaskModal: React.FC<taskModal> = ({
   setModalSidebar,
   showModalSidebar,
   setTask,
-  task,
+  tasks,
 }) => {
+  const { currentTask } = useContext(CurrentTaskProvider);
+
+  useEffect(() => {
+    if (currentTask) {
+      setTaskForm(currentTask);
+    }
+  }, [currentTask]);
+
   const [taskForm, setTaskForm] = useState({
     title: "",
     description: "",
   });
+
   const closeModal = () => {
     setModalSidebar({ ...showModalSidebar, modal: false });
   };
 
   const saveTask = (e: SyntheticEvent) => {
     e.preventDefault();
-    const newTask = {
-      ...taskForm,
-      id: nanoid(5),
-      created: format(new Date(), "dd/MMM/yyyy"),
-    };
-    setTask([...task, newTask]);
+    if (currentTask) {
+      const editedTask: ITask = {
+        ...currentTask,
+        ...taskForm,
+      };
+      setTask(
+        tasks.map((task) => (task.id === editedTask.id ? editedTask : task))
+      );
+    } else {
+      const newTask: ITask = {
+        ...taskForm,
+        status: "pending",
+        id: nanoid(8),
+        created: format(new Date(), "dd/MMM/yyyy"),
+      };
+      setTask([...tasks, newTask]);
+    }
     setModalSidebar({ ...showModalSidebar, modal: false });
   };
 
@@ -61,11 +82,13 @@ export const TaskModal: React.FC<taskModal> = ({
             id="title"
             type="text"
             name="title"
+            value={currentTask?.title}
             onChange={handleChangeInput}
           />
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
+            value={currentTask?.description}
             onChange={handleChangeInput}
             name="description"
           ></textarea>

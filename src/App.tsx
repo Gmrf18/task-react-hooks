@@ -31,7 +31,7 @@ function App() {
         <TaskModal
           setModalSidebar={setShowModalSidebar}
           showModalSidebar={showModalSidebar}
-          task={tasks}
+          tasks={tasks}
           setTask={setTask}
         />
       )}
