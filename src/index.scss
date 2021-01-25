@@ -5,9 +5,87 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #eee;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.taskRoot {
+  margin: 0em 2em;
+}
+
+.HeaderTable {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title {
+  width: 100px;
+}
+.created {
+  width: 200px;
+  text-align: center;
+}
+.TaskDetail {
+  margin: 0;
+  padding: 2em;
+  width: 400px;
+  background-color: #f1f1f1;
+  position: absolute;
+  top: 0em;
+  right: 0em;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal {
+  //display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding: 5rem;
+
+  .modalContent {
+    box-sizing: border-box;
+    padding: 2em;
+    background-color: #fefefe;
+    max-width: 500px;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    position: relative;
+    form {
+      display: flex;
+      flex-direction: column;
+      label {
+        margin: 1em 0em;
+      }
+    }
+  }
+}
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+table {
+  width: 100%;
+}
+
+.card {
+  background-color: #fff;
+
+  .card-container {
+    padding: 2.5em;
+  }
 }

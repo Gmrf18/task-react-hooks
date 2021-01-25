@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
+import { Props } from "../interfaces/modalSidebar.interface";
 
-export const TaskDetail = () => {
+export const TaskDetail: React.FC<Props> = ({
+  setModalSidebar,
+  showModalSidebar,
+}) => {
+  const { currentTask } = useContext(CurrentTaskProvider);
+
+  const closeSidebar = () => {
+    setModalSidebar({
+      ...showModalSidebar,
+      sidebar: false,
+    });
+  };
+
   return (
     <div className="TaskDetail">
-      <h3>Buy coffe</h3>
+      <button className="close" onClick={closeSidebar}>
+        X
+      </button>
+      <h3>{currentTask?.title}</h3>
       <select>
-        <option>uno</option>
+        <option>Pending</option>
       </select>
       <h5>Description</h5>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quia
-        possimus dicta et nemo asperiores ea quibusdam delectus id eligendi
-        provident, odit nesciunt expedita beatae iure! Debitis mollitia facilis
-        vel.
-      </p>
+      <p>{currentTask?.description}</p>
       <br />
-      <p>Updated Today , 6:30pm by Gerardo Reyes</p>
+      <p>Updated Today at 6:30pm by Gerardo Reyes</p>
+      <button>Edit</button>
+      <button>Delete</button>
     </div>
   );
 };
