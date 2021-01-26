@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
 import { Props } from "../interfaces/modalSidebar.interface";
 import { ITask } from "../interfaces/task.interface";
-import { format } from "date-fns";
+import { format, isSameDay, parseISO } from "date-fns";
 
 interface ITasks extends Props {
   tasks: ITask[];
@@ -27,6 +27,8 @@ export const Tasks: React.FC<ITasks> = ({
     setModalSidebar({ ...showModalSidebar, modal: true });
   };
 
+  const [filterDay, setFilterDay] = useState<string | null>(null);
+
   return (
     <div className="task-root">
       <div>{title}</div>
@@ -34,7 +36,12 @@ export const Tasks: React.FC<ITasks> = ({
       <div className="card">
         <div className="card-container">
           <div className="HeaderTable">
-            Task <input type="date"></input>
+            Task{" "}
+            <input
+              type="date"
+              onChange={(e: any) => setFilterDay(e.target.value)}
+            ></input>
+            {filterDay}
             <button onClick={newTask}>Add Task</button>
           </div>
           <table className="">
@@ -46,19 +53,25 @@ export const Tasks: React.FC<ITasks> = ({
               </tr>
             </thead>
             <tbody>
-              {tasks.map((task: ITask) => (
-                <tr key={task.id} onDoubleClick={() => openSidebar(task)}>
-                  <td className="title">
-                    {task.status == "Pending" ? "🛎️ " : "✔️ "} {task.title}
-                  </td>
-                  <td className="created">
-                    {format(task.created, "dd/MMM/yyyy")}
-                  </td>
-                  <td className="description">
-                    {task.description.substr(0, 50)}...
-                  </td>
-                </tr>
-              ))}
+              {tasks
+                .filter((task) =>
+                  filterDay
+                    ? isSameDay(task.created, parseISO(filterDay))
+                    : true
+                )
+                .map((task: ITask) => (
+                  <tr key={task.id} onDoubleClick={() => openSidebar(task)}>
+                    <td className="title">
+                      {task.status === "Pending" ? "🛎️ " : "✔️ "} {task.title}
+                    </td>
+                    <td className="created">
+                      {format(task.created, "dd/MMM/yyyy")}
+                    </td>
+                    <td className="description">
+                      {task.description.substr(0, 50)}...
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

@@ -62,9 +62,9 @@ export const TaskDetail: React.FC<taskModal> = ({
       <p>{currentTask?.description}</p>
       <br />
       <p>
-        {formatDistanceToNow(currentTask ? currentTask.update : new Date())} by
-        Gerardo Reyes
+        {formatDistanceToNow(currentTask ? currentTask.update : new Date())}
       </p>
+      <p>This application is created by Gerardo Reyes</p>
       <button onClick={editTask}>Edit</button>
       <button onClick={deleteTask}>Delete</button>
     </div>
