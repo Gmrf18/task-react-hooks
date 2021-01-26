@@ -25,6 +25,8 @@ function App() {
         <TaskDetail
           setModalSidebar={setShowModalSidebar}
           showModalSidebar={showModalSidebar}
+          tasks={tasks}
+          setTask={setTask}
         />
       )}
       {showModalSidebar.modal && (

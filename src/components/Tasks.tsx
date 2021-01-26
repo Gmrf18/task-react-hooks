@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
 import { Props } from "../interfaces/modalSidebar.interface";
 import { ITask } from "../interfaces/task.interface";
+import { format } from "date-fns";
 
 interface ITasks extends Props {
   tasks: ITask[];
@@ -47,8 +48,12 @@ export const Tasks: React.FC<ITasks> = ({
             <tbody>
               {tasks.map((task: ITask) => (
                 <tr key={task.id} onDoubleClick={() => openSidebar(task)}>
-                  <td className="title">{task.title}</td>
-                  <td className="created">{task.created}</td>
+                  <td className="title">
+                    {task.status == "Pending" ? "🛎️ " : "✔️ "} {task.title}
+                  </td>
+                  <td className="created">
+                    {format(task.created, "dd/MMM/yyyy")}
+                  </td>
                   <td className="description">
                     {task.description.substr(0, 50)}...
                   </td>

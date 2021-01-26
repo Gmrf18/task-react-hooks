@@ -1,7 +1,6 @@
 import React, { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { Props } from "../interfaces/modalSidebar.interface";
 import { nanoid } from "nanoid";
-import { format } from "date-fns";
 import { ITask } from "../interfaces/task.interface";
 import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
 
@@ -20,7 +19,7 @@ export const TaskModal: React.FC<taskModal> = ({
 
   useEffect(() => {
     if (currentTask) {
-      setTaskForm(currentTask);
+      setTaskForm({ ...currentTask });
     }
   }, [currentTask]);
 
@@ -35,10 +34,12 @@ export const TaskModal: React.FC<taskModal> = ({
 
   const saveTask = (e: SyntheticEvent) => {
     e.preventDefault();
+    const date = new Date();
     if (currentTask) {
       const editedTask: ITask = {
         ...currentTask,
         ...taskForm,
+        update: date,
       };
       setTask(
         tasks.map((task) => (task.id === editedTask.id ? editedTask : task))
@@ -46,9 +47,10 @@ export const TaskModal: React.FC<taskModal> = ({
     } else {
       const newTask: ITask = {
         ...taskForm,
-        status: "pending",
+        status: "Pending",
         id: nanoid(8),
-        created: format(new Date(), "dd/MMM/yyyy"),
+        created: date,
+        update: date,
       };
       setTask([...tasks, newTask]);
     }
@@ -82,13 +84,13 @@ export const TaskModal: React.FC<taskModal> = ({
             id="title"
             type="text"
             name="title"
-            value={currentTask?.title}
+            value={taskForm.title}
             onChange={handleChangeInput}
           />
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
-            value={currentTask?.description}
+            value={taskForm.description}
             onChange={handleChangeInput}
             name="description"
           ></textarea>
