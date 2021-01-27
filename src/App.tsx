@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import { Tasks } from "./components/Tasks";
 import { TaskDetail } from "./components/TaskDetail";
 import { TaskModal } from "./components/TaskModal";
 import { CurrentTaskProvider } from "./application/CurrentTaskProvider";
+import { ITask } from "./interfaces/task.interface";
 
 function App() {
   const [showModalSidebar, setShowModalSidebar] = useState({
@@ -11,8 +12,25 @@ function App() {
     modal: false,
   });
 
-  const [tasks, setTask] = useState([]);
+  const validateExistTasks = () => {
+    const tasksLocal: ITask[] = JSON.parse(localStorage.getItem("tasks") || "");
+    return tasksLocal
+      ? tasksLocal.map((task) => {
+          return {
+            ...task,
+            created: new Date(task.created),
+            update: new Date(task.created),
+          };
+        })
+      : [];
+  };
+
+  const [tasks, setTask] = useState<ITask[]>(validateExistTasks());
   const [currentTask, setCurrentTask] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <CurrentTaskProvider.Provider value={{ currentTask, setCurrentTask }}>
