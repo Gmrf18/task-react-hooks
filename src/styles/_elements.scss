@@ -15,6 +15,13 @@ code {
     monospace;
 }
 
+tbody tr {
+  &.complete {
+    color: #aaa;
+    text-decoration: line-through;
+  }
+}
+
 input,
 select,
 textarea {

@@ -32,7 +32,6 @@ export const Tasks: React.FC<ITasks> = ({
   return (
     <div className="task-root">
       <h1 className="Title">{title}</h1>
-
       <div className="card">
         <div className="card-container">
           <div className="HeaderTable">
@@ -63,9 +62,13 @@ export const Tasks: React.FC<ITasks> = ({
                     : true
                 )
                 .map((task: ITask) => (
-                  <tr key={task.id} onClick={() => openSidebar(task)}>
-                    <td className="status">
-                      {task.status === "Pending" ? "🕛" : "✔️"}{" "}
+                  <tr
+                    key={task.id}
+                    className={task.status === "Complete" ? "complete" : ""}
+                    onClick={() => openSidebar(task)}
+                  >
+                    <td className="status ">
+                      {task.status === "Pending" ? "🕛" : "✔️"}
                     </td>
                     <td className="title">{task.title}</td>
                     <td className="created">
