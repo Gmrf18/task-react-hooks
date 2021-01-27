@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #eee;
+  @include respond-to($phone) {
+    font-size: small;
+  }
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+input,
+select,
+textarea {
+  min-width: 15em;
+  height: 2.1em;
+  border-radius: 5px;
+  border: lightgray solid 1px;
+}
+textarea {
+  height: 5em;
+}
+table {
+  width: 100%;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+select {
+  width: 25em;
+}
+button {
+  padding: 0.5rem 0.9rem;
+  background-color: $primary;
+  color: #eee;
+  text-decoration: none;
+  display: inline-block;
+  border: $primary;
+  border-radius: 5px;
+}
