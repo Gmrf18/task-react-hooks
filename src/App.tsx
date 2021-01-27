@@ -13,16 +13,15 @@ function App() {
   });
 
   const validateExistTasks = () => {
-    const tasksLocal: ITask[] = JSON.parse(localStorage.getItem("tasks") || "");
-    return tasksLocal
-      ? tasksLocal.map((task) => {
-          return {
-            ...task,
-            created: new Date(task.created),
-            update: new Date(task.created),
-          };
-        })
-      : [];
+    const taskString = localStorage.getItem("tasks") || "[]";
+    const tasksLocal: ITask[] = JSON.parse(taskString);
+    return tasksLocal.map((task) => {
+      return {
+        ...task,
+        created: new Date(task.created),
+        update: new Date(task.created),
+      };
+    });
   };
 
   const [tasks, setTask] = useState<ITask[]>(validateExistTasks());
