@@ -26,15 +26,22 @@ code {
   }
 }
 
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+select {
+  width: 20em;
+}
+
 button {
-  padding: 0.3rem;
-  margin: 0 0.1em;
+  padding: 0.5rem 0.9rem;
   background-color: #259;
   color: #eee;
   text-decoration: none;
   display: inline-block;
-  border: none;
-  border-radius: 12%;
+  border: #259;
+  border-radius: 5px;
 }
 
 .HeaderTable {
@@ -44,20 +51,33 @@ button {
   margin-bottom: 1em;
 }
 
+.status {
+  text-align: center;
+}
 .title {
-  max-width: 10em;
+  max-width: 10%;
+  text-align: center;
 }
 .created {
   max-width: 15em;
   text-align: center;
 }
 .description {
-  max-width: 10em;
-  text-overflow: ellipsis;
-
-  /* Required for text-overflow to do anything */
-  white-space: nowrap;
-  overflow: hidden;
+  @include respond-to($tablet) {
+    display: none;
+  }
+  max-width: 40em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  p {
+    max-width: 80%;
+    text-overflow: ellipsis;
+    text-align: center;
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 .TaskDetail {
   margin: 0;
@@ -69,6 +89,23 @@ button {
   right: 0em;
   height: 100%;
   overflow: auto;
+  box-sizing: border-box;
+}
+
+.task-detail-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.buttons-group {
+  margin-top: 2em;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin: 0 0.6em;
+  }
 }
 
 .modal {
@@ -95,11 +132,6 @@ button {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
     position: relative;
-    .modal__buttons {
-      margin-top: 2em;
-      display: flex;
-      justify-content: flex-end;
-    }
     form {
       display: flex;
       flex-direction: column;

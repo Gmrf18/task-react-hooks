@@ -94,7 +94,7 @@ export const TaskModal: React.FC<taskModal> = ({
             onChange={handleChangeInput}
             name="description"
           ></textarea>
-          <div className="modal__buttons">
+          <div className="buttons-group">
             <button type="button" onClick={closeModal}>
               Cancel
             </button>

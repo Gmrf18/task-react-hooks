@@ -53,20 +53,28 @@ export const TaskDetail: React.FC<taskModal> = ({
       <button className="close" onClick={closeSidebar}>
         X
       </button>
-      <h3>{currentTask?.title}</h3>
-      <select value={currentTask?.status} onChange={setStatus}>
-        <option value="Pending">Pending</option>
-        <option value="Complete">Complete</option>
-      </select>
-      <h5>Description</h5>
-      <p>{currentTask?.description}</p>
-      <br />
-      <p>
-        {formatDistanceToNow(currentTask ? currentTask.update : new Date())}
-      </p>
-      <p>This application is created by Gerardo Reyes</p>
-      <button onClick={editTask}>Edit</button>
-      <button onClick={deleteTask}>Delete</button>
+      <div className="task-detail-content">
+        <div>
+          <h3>{currentTask?.title}</h3>
+          <select value={currentTask?.status} onChange={setStatus}>
+            <option value="Pending">Pending</option>
+            <option value="Complete">Complete</option>
+          </select>
+        </div>
+        <div>
+          <h5>Description</h5>
+          <p>{currentTask?.description}</p>
+        </div>
+        <br />
+        <p>
+          {formatDistanceToNow(currentTask ? currentTask.update : new Date())}
+        </p>
+        <p>This application is created by Gerardo Reyes</p>
+        <div className="buttons-group">
+          <button onClick={editTask}>Edit</button>
+          <button onClick={deleteTask}>Delete</button>
+        </div>
+      </div>
     </div>
   );
 };
