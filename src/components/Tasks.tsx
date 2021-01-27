@@ -31,17 +31,19 @@ export const Tasks: React.FC<ITasks> = ({
 
   return (
     <div className="task-root">
-      <div>{title}</div>
+      <h1 className="Title">{title}</h1>
 
       <div className="card">
         <div className="card-container">
           <div className="HeaderTable">
             Task{" "}
-            <input
-              type="date"
-              onChange={(e: any) => setFilterDay(e.target.value)}
-            ></input>
-            {filterDay}
+            <div>
+              <input
+                type="date"
+                onChange={(e: any) => setFilterDay(e.target.value)}
+              ></input>
+              <button onClick={() => setFilterDay(null)}>✖️</button>
+            </div>
             <button onClick={newTask}>Add Task</button>
           </div>
           <table className="">
@@ -60,15 +62,15 @@ export const Tasks: React.FC<ITasks> = ({
                     : true
                 )
                 .map((task: ITask) => (
-                  <tr key={task.id} onDoubleClick={() => openSidebar(task)}>
+                  <tr key={task.id} onClick={() => openSidebar(task)}>
                     <td className="title">
                       {task.status === "Pending" ? "🛎️ " : "✔️ "} {task.title}
                     </td>
                     <td className="created">
                       {format(task.created, "dd/MMM/yyyy")}
                     </td>
-                    <td className="description">
-                      {task.description.substr(0, 50)}...
+                    <td>
+                      <p className="description">{task.description}</p>
                     </td>
                   </tr>
                 ))}

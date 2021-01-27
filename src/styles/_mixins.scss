@@ -1,0 +1,17 @@
+@import "./_variables.scss";
+
+@mixin respond-to($media) {
+  @if $media == $tablet {
+    @media only screen and (max-width: $tablet) {
+      @content;
+    }
+  } @else if $media == $landscape {
+    @media only screen and (max-width: $landscape + 1) {
+      @content;
+    }
+  } @else if $media == $phone {
+    @media only screen and (max-width: $phone + 1) {
+      @content;
+    }
+  }
+}
