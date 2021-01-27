@@ -15,6 +15,17 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
+  @include respond-to($phone) {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      width: 100%;
+    }
+    div {
+      box-sizing: border-box;
+      width: 70%;
+    }
+  }
 }
 .task__title {
   font-size: large;
@@ -121,5 +132,8 @@
 
   .card-container {
     padding: 2.5em;
+    @include respond-to($phone) {
+      padding: 5% 2%;
+    }
   }
 }
