@@ -30,8 +30,12 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+.task__title {
+  font-size: large;
+  font-weight: bold;
+}
 select {
-  width: 20em;
+  width: 25em;
 }
 
 button {
@@ -49,6 +53,16 @@ button {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
+}
+input,
+select,
+textarea {
+  height: 2.1em;
+  border-radius: 5px;
+  border: #bbb solid 1px;
+}
+textarea {
+  height: 5em;
 }
 
 .status {
@@ -136,7 +150,7 @@ button {
       display: flex;
       flex-direction: column;
       label {
-        margin: 1em 0em;
+        margin: 0.5em 0em;
       }
     }
   }

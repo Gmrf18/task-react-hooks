@@ -36,7 +36,7 @@ export const Tasks: React.FC<ITasks> = ({
       <div className="card">
         <div className="card-container">
           <div className="HeaderTable">
-            Task{" "}
+            <span className="task__title">Task</span>
             <div>
               <input
                 type="date"
