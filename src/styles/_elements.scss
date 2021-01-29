@@ -30,6 +30,10 @@ textarea {
   border-radius: 5px;
   border: lightgray solid 1px;
 }
+input[type="datetime-local"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  display: none;
+}
 textarea {
   height: 5em;
 }
@@ -44,10 +48,11 @@ select {
 }
 button {
   padding: 0.5rem 0.9rem;
-  background-color: $primary;
-  color: #eee;
+  background-color: transparent;
+  color: #888;
+  transform: translateX(-3.8em);
   text-decoration: none;
   display: inline-block;
-  border: $primary;
+  border: transparent;
   border-radius: 5px;
 }

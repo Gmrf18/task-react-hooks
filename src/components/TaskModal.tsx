@@ -65,10 +65,7 @@ export const TaskModal: React.FC<taskModal> = ({
   };
 
   const blurModal = (e: any) => {
-    const elements: string[] = e.nativeEvent.path.map(
-      (el: HTMLElement) => el.className
-    );
-    !elements.includes("modalContent") && closeModal();
+    e.target.className === "modal" && closeModal();
   };
 
   return (

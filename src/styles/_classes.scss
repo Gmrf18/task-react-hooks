@@ -32,7 +32,30 @@
   font-weight: bold;
 }
 .status {
+  font-size: x-large;
   text-align: center;
+}
+.addButton {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 145px;
+  color: #3c5cbf;
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: 700;
+  vertical-align: middle;
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 30px;
+    background: #ccc;
+    margin-right: 1.5em;
+    margin-left: 1em;
+    vertical-align: middle;
+  }
 }
 .title {
   max-width: 10%;

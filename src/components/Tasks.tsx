@@ -3,7 +3,12 @@ import { CurrentTaskProvider } from "../application/CurrentTaskProvider";
 import { Props } from "../interfaces/modalSidebar.interface";
 import { ITask } from "../interfaces/task.interface";
 import { format, isSameDay, parseISO } from "date-fns";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimesCircle,
+  faCheckCircle as Incomplete,
+} from "@fortawesome/free-regular-svg-icons";
+import { faCheckCircle as Complete } from "@fortawesome/free-solid-svg-icons";
 interface ITasks extends Props {
   tasks: ITask[];
 }
@@ -27,7 +32,7 @@ export const Tasks: React.FC<ITasks> = ({
     setModalSidebar({ ...showModalSidebar, modal: true });
   };
 
-  const [filterDay, setFilterDay] = useState<string | null>(null);
+  const [filterDay, setFilterDay] = useState<string | any | null>(null);
 
   return (
     <div className="task-root">
@@ -38,12 +43,20 @@ export const Tasks: React.FC<ITasks> = ({
             <span className="task__title">Task</span>
             <div>
               <input
+                className=""
                 type="date"
+                value={filterDay || ""}
                 onChange={(e: any) => setFilterDay(e.target.value)}
               ></input>
               <button onClick={() => setFilterDay(null)}>X</button>
             </div>
-            <button onClick={newTask}>Add Task</button>
+            <button className="addButton" onClick={newTask}>
+              <FontAwesomeIcon
+                style={{ transform: "rotate(45deg)" }}
+                icon={faTimesCircle}
+              />
+              Add Task
+            </button>
           </div>
           <table className="">
             <thead>
@@ -68,7 +81,14 @@ export const Tasks: React.FC<ITasks> = ({
                     onClick={() => openSidebar(task)}
                   >
                     <td className="status ">
-                      {task.status === "Pending" ? "🕛" : "✔️"}
+                      {task.status === "Pending" ? (
+                        <FontAwesomeIcon icon={Incomplete} />
+                      ) : (
+                        <FontAwesomeIcon
+                          style={{ color: "green" }}
+                          icon={Complete}
+                        />
+                      )}
                     </td>
                     <td className="title">{task.title}</td>
                     <td className="created">

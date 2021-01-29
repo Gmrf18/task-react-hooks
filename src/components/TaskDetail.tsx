@@ -32,7 +32,7 @@ export const TaskDetail: React.FC<taskModal> = ({
       status: e.target.value,
     };
     setCurrentTask(taskE);
-    setTask(tasks.map((task) => (task.id == taskE.id ? taskE : task)));
+    setTask(tasks.map((task) => (task.id === taskE.id ? taskE : task)));
   };
 
   const editTask = () => {
